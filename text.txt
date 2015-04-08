@@ -1,0 +1,7 @@
+The BufferedWriter class provides buffering to your Writer's. Buffering can speed up IO quite a bit. Rather than write one character at a time to the network or disk, you write a larger block at a time. This is typically much faster, especially for disk access and larger data amounts.
+To add buffering to your Writer's simply wrap them in a BufferedWriter. Here is how that looks:
+Writer writer = new BufferedWriter(new FileWriter("c:\\data\\output-file.txt"));
+Simple, isn't it? You can set the buffer size to use internally by the BufferedWriter. You provide the size as a constructor parameter, like this:
+Writer writer = new BufferedWriter(new FileWriter("c:\\data\\output-file.txt"),8 * 1024);
+This example sets the internal buffer to 8 KB. It is best to use buffer sizes that are multiples of 1024 bytes. That works best with most built-in buffering in hard disks etc.
+Except for adding buffering to your input streams, BufferedWriter behaves pretty much like a Writer. It adds one extra method though: The newLine() method which can write a new-line character to the underlying Writer. In addition, you may need to call flush() if you need to be absolutely sure that the characters written until now is flushed out of the buffer and onto the network or disk.
