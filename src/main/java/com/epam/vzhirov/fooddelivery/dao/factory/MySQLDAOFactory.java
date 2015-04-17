@@ -1,14 +1,14 @@
 package com.epam.vzhirov.fooddelivery.dao.factory;
 
-import com.epam.vzhirov.fooddelivery.dao.customer.CustomerDAO;
-import com.epam.vzhirov.fooddelivery.dao.customer.MySQLCustomerDAO;
+import com.epam.vzhirov.fooddelivery.dao.jdbcDao.customer.CustomerDao;
+import com.epam.vzhirov.fooddelivery.dao.jdbcDao.customer.JdbcCustomerDao;
 
 
 public class MySQLDAOFactory extends DAOFactory {
 
       @Override
-    public CustomerDAO getCustomerDAO() {
-        return new MySQLCustomerDAO();
+    public CustomerDao getCustomerDAO() {
+        return new JdbcCustomerDao();
     }
 }
 

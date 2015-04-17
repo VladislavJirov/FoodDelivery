@@ -1,12 +1,12 @@
 package com.epam.vzhirov.fooddelivery.dao.factory;
 
-import com.epam.vzhirov.fooddelivery.dao.customer.CustomerDAO;
+import com.epam.vzhirov.fooddelivery.dao.jdbcDao.customer.CustomerDao;
 
 public abstract class DAOFactory {
 
     public static final int MYSQL = 1;
 
-    public abstract CustomerDAO getCustomerDAO();
+    public abstract CustomerDao getCustomerDAO();
 
     public static DAOFactory getDAOFactory(int factoryNumber){
         switch(factoryNumber){

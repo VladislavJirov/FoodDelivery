@@ -1,11 +1,10 @@
 package com.epam.vzhirov.fooddelivery;
 
-import com.epam.vzhirov.fooddelivery.dao.customer.CustomerDAO;
+import com.epam.vzhirov.fooddelivery.dao.jdbcDao.customer.CustomerDao;
 import com.epam.vzhirov.fooddelivery.dao.factory.DAOFactory;
 import com.epam.vzhirov.fooddelivery.model.Customer;
 
 import java.io.*;
-import java.sql.SQLException;
 
 public class Runner {
 
@@ -17,7 +16,7 @@ public class Runner {
 
         try {
             DAOFactory sqlFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
-            CustomerDAO mySQL  = sqlFactory.getCustomerDAO();
+            CustomerDao mySQL  = sqlFactory.getCustomerDAO();
             mySQL.addCustomer(customer);
         } catch (Exception e) {
             e.printStackTrace();
