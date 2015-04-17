@@ -1,8 +1,9 @@
 package com.epam.vzhirov.fooddelivery.model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Customer {
+public class Customer implements Serializable {
 
     private String login, password, email, firstName, lastName, address, contactNumber;
     private boolean validated = false;
@@ -10,6 +11,8 @@ public class Customer {
     private List<Order> orders;
 
     //TODO ADD DISCOUNTS HERE???
+
+    public Customer(){}
 
     public Customer(String login, String password) {
         this.login = login;
