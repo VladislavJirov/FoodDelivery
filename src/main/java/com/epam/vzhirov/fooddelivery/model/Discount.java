@@ -1,9 +1,10 @@
 package com.epam.vzhirov.fooddelivery.model;
 
 public class Discount {
-
-
-    String name, description;
+    String name;
+    String description;
+    String requirement;
     int value;
+
 
 }

@@ -1,12 +1,12 @@
 package com.epam.vzhirov.fooddelivery;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.sql.DataSource;
+import java.io.PrintWriter;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
-public class ConnectionPool {
+public class ConnectionPool implements DataSource {
     private static ConnectionPool instance;
     private final String DRIVER_NAME;
     private ArrayList<Connection> freeConnections = new ArrayList<>();
@@ -59,6 +59,11 @@ public class ConnectionPool {
         return connection;
     }
 
+    @Override
+    public Connection getConnection(String username, String password) throws SQLException {
+        return null;
+    }
+
     private Connection newConnection(){
         Connection connection = null;
         try{
@@ -92,5 +97,40 @@ public class ConnectionPool {
             }
             freeConnections.clear();
         }
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public PrintWriter getLogWriter() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void setLogWriter(PrintWriter out) throws SQLException {
+
+    }
+
+    @Override
+    public void setLoginTimeout(int seconds) throws SQLException {
+
+    }
+
+    @Override
+    public int getLoginTimeout() throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+        return null;
     }
 }

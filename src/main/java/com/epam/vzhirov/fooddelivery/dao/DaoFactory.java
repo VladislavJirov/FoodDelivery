@@ -1,24 +1,20 @@
 package com.epam.vzhirov.fooddelivery.dao;
 
-import com.epam.vzhirov.fooddelivery.dao.jdbcDao.*;
-
-import java.util.EnumMap;
+import com.epam.vzhirov.fooddelivery.dao.jdbs.JdbcDaoFactory;
 
 public abstract class DaoFactory {
 
-    public abstract <T extends JdbcBaseDao> T create(Class<T> daoClass);
-
-    static EnumMap<Type, DaoFactory> factories = new EnumMap<Type, DaoFactory>(Type.class);
-
-    static {
-        factories.put(Type.JDBC, JdbcDaoFactory.getInstance());
-    }
-
     public static DaoFactory getInstance(Type type) {
-        return factories.get(type);
+        switch (type) {
+            case JDBC:
+                return new JdbcDaoFactory();
+            default:
+                throw new DaoException("Implementation for " + type + " doesn't exist");
+        }
     }
 
-    public enum Type {
-        JDBC
-    }
+    public abstract DaoManager createDaoManager();
+
+    public enum Type {JDBC}
+
 }

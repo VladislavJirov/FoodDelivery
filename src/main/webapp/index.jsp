@@ -1,31 +1,31 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--@elvariable id="order" type="com.epam.vzhirov.fooddelivery.model.Order"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-
+<html>
 <head>
-    <fmt:bundle basename="welcome">
-        <fmt:message key="hello"></fmt:message>
-    </fmt:bundle>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <title>Food Delivery Service </title>
+    <title>Untitled Cafe</title>
 </head>
 <body>
-<h1>Dishes list below</h1>
+<div class="header-panel">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="signup.jsp">Sign UP</a>
+            </li>
+            <li>
+                <a href="signin.jsp">Sign IN</a>
+            </li>
+        </ul>
+    </div>
+    <div class="greeting">
+        <h1>Hello ${name} Welcome to Untitled Cafe Website</h1>
+    </div>
+</div>
+<div class="body">
+    <h2> Some information about session</h2>
+    <pre> ${session} </pre>
+</div>
 
-<c:forEach items="${order.dishes}" var="dishName">
-
-    <h2>${dishName.name}</h2>
-
-    <blockquote class="nice-site">
-        <c:forEach items="${dishName.ingredients}" var="ingrEntry">
-            <div>${ingrEntry.key.name}</div>
-        </c:forEach>
-    </blockquote>
-
-    <h3> Raw price: ${order.rawPrice}</h3>
-
-</c:forEach>
-
+<div class="bottom">
+    <h3>Bottom</h3>
+</div>
 </body>
+</html>

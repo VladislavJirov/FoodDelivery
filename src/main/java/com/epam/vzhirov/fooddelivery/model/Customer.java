@@ -2,25 +2,45 @@ package com.epam.vzhirov.fooddelivery.model;
 
 import java.io.Serializable;
 import java.util.*;
+import java.time.*;
 
-public class Customer implements Serializable {
+public class Customer extends BaseEntity implements Serializable {
 
-    private String login, password, email, firstName, lastName, address, contactNumber;
-    private boolean validated = false;
-    private Date registrationDate, birthDate;
+    private String login;
+    private String password;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
+    private String address;
+    private String contactNumber;
+    private boolean validated;
+    private LocalDate registrationDate;
+    private LocalDate lastVisit;
     private List<Order> orders;
-
-    //TODO ADD DISCOUNTS HERE???
-
-    public Customer(){}
+    private List<Discount> discounts;
 
     public Customer(String login, String password) {
         this.login = login;
         this.password = password;
-        this.registrationDate = Calendar.getInstance().getTime();
+        this.registrationDate = LocalDate.now();
     }
 
-    public Date getRegistrationDate() {
+    @Override
+    public String toString() {
+        System.out.println(login);
+        return null;
+    }
+
+    public LocalDate getLastVisit() {
+        return lastVisit;
+    }
+
+    public void setLastVisit(LocalDate lastVisit) {
+        this.lastVisit = lastVisit;
+    }
+
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
@@ -94,6 +114,22 @@ public class Customer implements Serializable {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public Discount setDiscount(Discount discount) {
+        if (this.discounts.contains(discount)){
+            return null;
+        }
+        this.discounts.add(discount);
+        return discount;
+    }
+
+    public void removeDiscount(Discount discount) {
+        this.discounts.remove(discount);
     }
 
     public List<Order> getOrders() {

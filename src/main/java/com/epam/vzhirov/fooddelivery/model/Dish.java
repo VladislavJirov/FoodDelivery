@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dish {
 
-    //TODO variable for image file
+    private String image;
     private String name;
     private Map<Ingredient, Integer> ingredients;
     private String category; //TODO add categories (enum, or?)
