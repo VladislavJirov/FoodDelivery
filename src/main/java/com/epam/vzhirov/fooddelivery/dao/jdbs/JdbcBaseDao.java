@@ -4,7 +4,7 @@ import com.epam.vzhirov.fooddelivery.dao.AbstractDao;
 
 import java.sql.Connection;
 
-public abstract class JdbcBaseDao <T> implements AbstractDao<T, Long> {
+public abstract class JdbcBaseDao<T> implements AbstractDao<T, Long> {
 
     private Connection connection;
 

@@ -26,7 +26,10 @@ public class Runner {
             return null;
         });
 
-        System.out.println(customers.get(0).toString());
+        for (Customer customer : customers) {
+            customer.toString();
+        }
+
 
 
 

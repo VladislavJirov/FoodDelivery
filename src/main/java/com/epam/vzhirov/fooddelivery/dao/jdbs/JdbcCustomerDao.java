@@ -2,7 +2,7 @@ package com.epam.vzhirov.fooddelivery.dao.jdbs;
 
 import com.epam.vzhirov.fooddelivery.dao.CustomerDao;
 import com.epam.vzhirov.fooddelivery.model.Customer;
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,16 +11,13 @@ import java.util.List;
 
 public class JdbcCustomerDao extends JdbcBaseDao<Customer> implements CustomerDao {
 
-    private final Connection connection;
-
-    public JdbcCustomerDao(Connection connection) {
-        this.connection = connection;
+    public JdbcCustomerDao() {
     }
 
     @Override
     public Long add(Customer customer) throws SQLException {
         String insert = "INSERT INTO CUSTOMER (LOGIN,PASSWORD) VALUES (?,?)";
-        PreparedStatement ps = connection.prepareStatement(insert);
+        PreparedStatement ps = super.getConnection().prepareStatement(insert);
         ps.setString(1, customer.getLogin());
         ps.setString(2, customer.getPassword());
         ps.executeUpdate();
@@ -44,14 +41,14 @@ public class JdbcCustomerDao extends JdbcBaseDao<Customer> implements CustomerDa
 
     @Override
     public List<Customer> getAll() throws SQLException {
-        String getAll = "SELECT * FROM CUSTOMER";
-        PreparedStatement stm = connection.prepareStatement(getAll);
+        String getAll = "SELECT * FROM CUSTOMERS";
+        PreparedStatement stm = super.getConnection().prepareStatement(getAll);
         ResultSet rs = stm.executeQuery();
         List<Customer> list = new ArrayList<>();
         while (rs.next()) {
             String login = rs.getString("login");
-            int id = rs.getInt("id");
-            Customer c = new Customer(login,"test");
+            String password = rs.getString("password");
+            Customer c = new Customer(login, password);
             list.add(c);
         }
         return list;

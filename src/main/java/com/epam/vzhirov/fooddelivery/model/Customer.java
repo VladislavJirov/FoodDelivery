@@ -29,6 +29,7 @@ public class Customer extends BaseEntity implements Serializable {
     @Override
     public String toString() {
         System.out.println(login);
+        System.out.println(password);
         return null;
     }
 

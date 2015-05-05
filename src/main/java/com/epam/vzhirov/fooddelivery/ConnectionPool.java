@@ -1,46 +1,57 @@
 package com.epam.vzhirov.fooddelivery;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.concurrent.BlockingQueue;
 import java.util.logging.Logger;
 
-public class ConnectionPool implements DataSource {
+public final class ConnectionPool implements DataSource {
+
+    private static BlockingQueue<Connection> connections;
     private static ConnectionPool instance;
-    private final String DRIVER_NAME;
+    private String DRIVER_NAME;
     private ArrayList<Connection> freeConnections = new ArrayList<>();
     private String URL;
     private String login;
     private String password;
     private int maximumConnections;
 
-    public ConnectionPool(String DRIVER_NAME, String URL, String login, String password, int maximumConnections) {
-        this.DRIVER_NAME = DRIVER_NAME;
-        this.URL = URL;
-        this.login = login;
-        this.password = password;
-        this.maximumConnections = maximumConnections;
-        loadDrivers();
+    public static ConnectionPool getInstance() {
+        instance = InstanceHolder.CP_HOLDER_INSTANCE;
+        Properties prop = new Properties();
+        try {
+            prop.load(instance.getClass().getResourceAsStream("src/main/resources/cp.properties"));
+            for(String key : prop.stringPropertyNames()) {
+                String value = prop.getProperty(key);
+                System.out.println(key + " => " + value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        instance.DRIVER_NAME = prop.getProperty();
+//        instance.URL = prop.getProperty(URL);
+//        instance.login = prop.getProperty(login);
+//        instance.password = prop.getProperty(password);
+//        instance.maximumConnections = maxConn;
+//        instance.loadDrivers();
+        return instance;
     }
 
-    private void loadDrivers(){
-        try{
-            Driver driver = (Driver)Class.forName(DRIVER_NAME).newInstance();
+    private void loadDrivers() {
+        try {
+            Driver driver = (Driver) Class.forName(DRIVER_NAME).newInstance();
             DriverManager.registerDriver(driver);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    static synchronized public ConnectionPool getInstance(String DRIVER_NAME, String URL,
-                                                          String login, String password, int maxConn){
-        if (instance == null) {instance = new ConnectionPool(DRIVER_NAME,URL,login,password,maxConn);}
-        return instance;
-    }
-
-    public synchronized Connection getConnection(){
+    public synchronized Connection getConnection() {
         Connection connection;
         if (!freeConnections.isEmpty()) {
             connection = freeConnections.get(freeConnections.size() - 1);
@@ -52,8 +63,7 @@ public class ConnectionPool implements DataSource {
             } catch (Exception e) {
                 connection = getConnection();
             }
-        }
-        else {
+        } else {
             connection = newConnection();
         }
         return connection;
@@ -64,31 +74,31 @@ public class ConnectionPool implements DataSource {
         return null;
     }
 
-    private Connection newConnection(){
+    private Connection newConnection() {
         Connection connection = null;
-        try{
-        if (login == null){
-            connection = DriverManager.getConnection(URL);
-            System.out.println("CONNECTED");}
-        else {
-            connection = DriverManager.getConnection(URL,login,password);
-            System.out.println("CONNECTED");}
-        }
-        catch (Exception e){
+        try {
+            if (login == null) {
+                connection = DriverManager.getConnection(URL);
+                System.out.println("CONNECTED");
+            } else {
+                connection = DriverManager.getConnection(URL, login, password);
+                System.out.println("CONNECTED");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
         return connection;
     }
 
-    public synchronized void freeConnection(Connection connection){
+    public synchronized void freeConnection(Connection connection) {
         //put the connection in the end of our free connections list
-        if ((connection != null) && (freeConnections.size() <= maximumConnections)){
+        if ((connection != null) && (freeConnections.size() <= maximumConnections)) {
             freeConnections.add(connection);
         }
     }
 
-    public  synchronized void releaseConnection(){
+    public synchronized void releaseConnection() {
         for (Connection freeConnection : freeConnections) {
             try {
                 freeConnection.close();
@@ -120,17 +130,22 @@ public class ConnectionPool implements DataSource {
     }
 
     @Override
-    public void setLoginTimeout(int seconds) throws SQLException {
-
-    }
-
-    @Override
     public int getLoginTimeout() throws SQLException {
         return 0;
     }
 
     @Override
+    public void setLoginTimeout(int seconds) throws SQLException {
+
+    }
+
+    @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return null;
+    }
+
+    //On Demand Holder
+    public static class InstanceHolder {
+        private static final ConnectionPool CP_HOLDER_INSTANCE = new ConnectionPool();
     }
 }
