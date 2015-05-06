@@ -3,17 +3,17 @@
 <Context>
 
     <Resource name="jdbc/customcp"
-    auth="Container"
-    type="javax.sql.DataSource"
-    maxIdle="5"
-    maxWait="10000"
-    initialSize="0"
-    maxTotal="10"
-    minEvictableIdleTimeMillis="30000"
-    username="sa"
-    password="sa"
-    driverClassName="org.h2.Driver"
-    url="jdbc:h2:tcp://localhost/test"/>
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxIdle="5"
+              maxWait="10000"
+              initialSize="0"
+              maxTotal="10"
+              minEvictableIdleTimeMillis="30000"
+              username="sa"
+              password="sa"
+              driverClassName="org.h2.Driver"
+              url="jdbc:h2:tcp://localhost/test"/>
 
     <Resource name="jdbc/tomcatcp"
               auth="Container"

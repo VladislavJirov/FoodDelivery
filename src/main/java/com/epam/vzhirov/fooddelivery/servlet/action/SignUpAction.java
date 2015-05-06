@@ -12,6 +12,10 @@ public class SignUpAction implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request) {
+
+
+
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
@@ -34,9 +38,6 @@ public class SignUpAction implements Action {
             }
             return null;
         });
-
-        return new ActionResult("index", true);
-
-//
+        return new ActionResult("controller/successfulauth", true);
     }
 }

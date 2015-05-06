@@ -8,20 +8,19 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="signup.jsp">Sign UP</a>
+                <a href="signup">Sign UP</a>
             </li>
             <li>
-                <a href="signin.jsp">Sign IN</a>
+                <a href="signin">Sign IN</a>
             </li>
         </ul>
     </div>
     <div class="greeting">
-        <h1>Hello ${name} Welcome to Untitled Cafe Website</h1>
+        <h1>Welcome to Untitled Cafe Website</h1>
     </div>
 </div>
 <div class="body">
     <h2> Some information about session</h2>
-    <pre> ${session} </pre>
 </div>
 
 <div class="bottom">

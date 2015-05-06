@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/front")
+@WebServlet(name = "Controller" ,urlPatterns = "/controller/*")
 public class Servlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String actionName = req.getMethod() + req.getPathInfo();
+        String actionName = req.getMethod() + req.getRequestURI();
         System.out.println(actionName);
         Action action = ActionFactory.getAction(actionName);
         ActionResult result = action.execute(req);
@@ -27,7 +27,7 @@ public class Servlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/" + result.getPath());
             return;
         }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/" + result.getPath() + ".jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/views/" + result.getPath() + ".jsp");
         requestDispatcher.forward(req, resp);
     }
 }

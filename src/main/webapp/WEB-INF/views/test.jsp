@@ -8,7 +8,7 @@
     <fmt:bundle basename="welcome">
         <fmt:message key="hello"></fmt:message>
     </fmt:bundle>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="../../index.css">
     <title>Food Delivery Service </title>
 </head>
 <body>

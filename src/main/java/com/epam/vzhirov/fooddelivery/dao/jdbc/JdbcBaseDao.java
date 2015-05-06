@@ -1,4 +1,4 @@
-package com.epam.vzhirov.fooddelivery.dao.jdbs;
+package com.epam.vzhirov.fooddelivery.dao.jdbc;
 
 import com.epam.vzhirov.fooddelivery.dao.AbstractDao;
 

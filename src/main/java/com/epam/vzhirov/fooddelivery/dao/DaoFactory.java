@@ -1,6 +1,6 @@
 package com.epam.vzhirov.fooddelivery.dao;
 
-import com.epam.vzhirov.fooddelivery.dao.jdbs.JdbcDaoFactory;
+import com.epam.vzhirov.fooddelivery.dao.jdbc.JdbcDaoFactory;
 
 public abstract class DaoFactory {
 

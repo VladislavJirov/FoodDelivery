@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Sign UP</h1>
-<form action="<c:url value="/signup.jsp"/>"  method="post">
+<form action="signup"  method="post">
     <div>Login: <input type="text" name="login" placeholder="Login"/></div>
     <div>Password: <input type="text" name="password" placeholder="Password"/></div>
     <div>First Name: <input type="text" name="firstName" placeholder="First name"/></div>

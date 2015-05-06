@@ -1,4 +1,4 @@
-package com.epam.vzhirov.fooddelivery.dao.jdbs;
+package com.epam.vzhirov.fooddelivery.dao.jdbc;
 
 import com.epam.vzhirov.fooddelivery.dao.CustomerDao;
 import com.epam.vzhirov.fooddelivery.model.Customer;
@@ -16,10 +16,13 @@ public class JdbcCustomerDao extends JdbcBaseDao<Customer> implements CustomerDa
 
     @Override
     public Long add(Customer customer) throws SQLException {
-        String insert = "INSERT INTO CUSTOMER (LOGIN,PASSWORD) VALUES (?,?)";
+        String insert = "INSERT INTO CUSTOMERS (LOGIN,PASSWORD,FIRSTNAME,LASTNAME,EMAIL) VALUES (?,?,?,?,?)";
         PreparedStatement ps = super.getConnection().prepareStatement(insert);
         ps.setString(1, customer.getLogin());
         ps.setString(2, customer.getPassword());
+        ps.setString(3, customer.getFirstName());
+        ps.setString(4, customer.getLastName());
+        ps.setString(5, customer.getEmail());
         ps.executeUpdate();
         return null;
     }
