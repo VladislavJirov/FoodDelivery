@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- TODO БИБЛИОТЕКА С ЦИКЛАМИ И ПРОЧЕЙ ХЕРНЁЙ -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--@elvariable id="order" type="com.epam.vzhirov.fooddelivery.model.Order"--%>
 <%--<script src="<%=request.getContextPath()%>/assets/js/test.js" charset="UTF-8" ></script>--%>
