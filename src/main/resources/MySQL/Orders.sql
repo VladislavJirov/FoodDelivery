@@ -1,0 +1,16 @@
+CREATE TABLE CUSTOMERS (
+  id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  uuid BINARY UNIQUE,
+  login VARCHAR(15),
+  password VARCHAR(15),
+  email VARCHAR(15),
+  firstname varchar(15),
+  lastname varchar(15),
+  birthday DATE,
+  address varchar(15),
+  contactnumber VARCHAR(15),
+  validated BIT,
+  registrationdate DATE,
+  lastvisit DATE,
+  orders INTEGER,
+  discounts INTEGER)

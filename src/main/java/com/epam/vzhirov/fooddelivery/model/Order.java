@@ -1,19 +1,19 @@
 package com.epam.vzhirov.fooddelivery.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
+
+import java.util.*;
 
 public class Order {
 
-    private Map<Dish, Integer> dishes = new HashMap<Dish, Integer>();
-    private Integer rawPrice;
-    private List<Discount> discounts = new ArrayList<Discount>(); // init. not required
+    private Map<Dish, Integer> dishes = new HashMap<>();
+    private Money rawPrice;
+    private List<Discount> discounts = new ArrayList<>(); // init. not required
     private Integer totalPrice;
 
     public Order() {
-        this.rawPrice = 0;
+        this.rawPrice = Money.zero(CurrencyUnit.of(Locale.getDefault()));
     }
 
     public Map<Dish, Integer> getDishes() {
@@ -22,7 +22,7 @@ public class Order {
 
     public void setDishes(Dish dish, Integer amount) {
         dishes.put(dish, amount);
-        this.rawPrice += dish.getPrice();
+        this.rawPrice = Money.total(rawPrice, dish.getPrice());
     }
 
     public List<Discount> getDiscounts() {
@@ -33,7 +33,7 @@ public class Order {
         this.discounts = discounts;
     }
 
-    public Integer getRawPrice() {
+    public Money getRawPrice() {
         return rawPrice;
     }
 

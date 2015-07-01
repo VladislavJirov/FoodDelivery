@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sign IN</title>
+    <title>Successful Registration</title>
 </head>
 <body>
-<pre> ${attr} </pre>
+<div> Your account successfully registered.</div>
 </body>
 </html>

@@ -1,12 +1,8 @@
 package com.epam.vzhirov.fooddelivery.model;
 
-public class Ingredient {
+public class Category {
 
     private String name;
-
-    public Ingredient(String name) {
-        this.name = name;
-    }
 
     public String getName() {
         return name;

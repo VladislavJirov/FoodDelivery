@@ -1,18 +1,22 @@
 package com.epam.vzhirov.fooddelivery.model;
 
-import java.util.*;
+import org.joda.money.Money;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dish {
 
-    private String image;
+    //image of dish should be find by UUID
     private String name;
-    private Map<Ingredient, Integer> ingredients;
-    private String category; //TODO add categories (enum, or?)
+    private List<Ingredient> ingredients;
+    private Category category;
     private String description;
-    private int price;    //TODO replace int with decimal or create money class
+    private Money price;
     private int calories;
+    private Boolean available;
 
-    public Dish(String name, int price) {
+    public Dish(String name, Money price) {
         this.name = name;
         this.price = price;
     }
@@ -25,27 +29,42 @@ public class Dish {
         this.name = name;
     }
 
-    public Map<Ingredient, Integer> getIngredients() {
-        if (ingredients == null){return null;}  //check if list exists
-        return ingredients;
+    public List<Ingredient> getIngredients() {
+        if (this.ingredients == null) {
+            return null;
+        }
+        return this.ingredients;
     }
 
     public void setIngredients(Ingredient ingredient, Integer amount) {
-        if (ingredients == null){ ingredients = new HashMap<Ingredient, Integer>();}
-        ingredients.put(ingredient, amount);
-        calculateCalories(); //TODO make sure if calories exists
+        if (this.ingredients == null) {
+            this.ingredients = new ArrayList<>();
+        }
+        this.ingredients.add(ingredient);
     }
 
-    public int getPrice() {
+    public Money getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Money price) {
         this.price = price;
     }
 
     public int getCalories() {
         return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getDescription() {
@@ -56,15 +75,17 @@ public class Dish {
         this.description = description;
     }
 
-    public void removeIngreident(Ingredient ingredient){
-        ingredients.remove(ingredient);
-        calculateCalories();
+    public void removeIngreident(Ingredient ingredient) {
+        if (this.ingredients != null) {
+            ingredients.remove(ingredient);
+        }
     }
 
-    private void calculateCalories(){
-        this.calories = 0;
-        for (Map.Entry<Ingredient, Integer> entry : ingredients.entrySet()) {
-            this.calories += entry.getKey().getCalories()*(entry.getValue()/100); //Pull calories from ingredient and multiply em for amount
-        }
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }

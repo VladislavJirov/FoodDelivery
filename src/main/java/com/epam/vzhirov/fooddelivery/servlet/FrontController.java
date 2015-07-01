@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Controller" ,urlPatterns = "/controller/*")
-public class Servlet extends HttpServlet {
+@WebServlet(name = "FrontController" ,urlPatterns = "/c/*")
+public class FrontController extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,10 +23,10 @@ public class Servlet extends HttpServlet {
         Action action = ActionFactory.getAction(actionName);
         ActionResult result = action.execute(req);
 
-        if (result.isRedirect()) {
-            resp.sendRedirect(req.getContextPath() + "/" + result.getPath());
-            return;
-        }
+//        if (result.isRedirect()) {
+//            resp.sendRedirect(req.getContextPath() + "/" + result.getPath());
+//            return;
+//        }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/views/" + result.getPath() + ".jsp");
         requestDispatcher.forward(req, resp);
     }

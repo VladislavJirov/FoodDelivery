@@ -8,12 +8,14 @@ public class ActionFactory {
     private static final Map<String,Action> actions = new HashMap<>();
 
     static {
-        actions.put("POST/controller/signup", new SignUpAction());
+        actions.put("POST/c/signup", new NewUser());
 
-        actions.put("GET/controller/signup", new ShowPage("signup"));
-        actions.put("GET/controller/index", new ShowPage("index"));
-        actions.put("GET/controller/", new ShowPage("index"));
-        actions.put("GET/controller/successfulauth", new ShowPage("successfulauth"));
+        actions.put("GET/c/signup", new ShowPage("signup"));
+        actions.put("GET/c/login", new ShowPage("login"));
+        actions.put("GET/c/index", new ShowPage("index"));
+        actions.put("GET/c/", new ShowPage("index"));
+
+        actions.put("GET/c/successfulauth", new ShowPage("successfulauth"));
     }
 
     public static Action getAction(String actionName){

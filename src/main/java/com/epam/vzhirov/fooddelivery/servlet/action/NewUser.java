@@ -8,20 +8,15 @@ import com.epam.vzhirov.fooddelivery.model.Customer;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
-public class SignUpAction implements Action {
+public class NewUser implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request) {
-
-
-
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
-
 
         Customer customer = new Customer(login, password);
         customer.setFirstName(firstName);
@@ -38,6 +33,6 @@ public class SignUpAction implements Action {
             }
             return null;
         });
-        return new ActionResult("controller/successfulauth", true);
+        return new ActionResult("c/successfulreg", true);
     }
 }

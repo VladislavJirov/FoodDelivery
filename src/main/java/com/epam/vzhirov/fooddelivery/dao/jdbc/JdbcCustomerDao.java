@@ -29,12 +29,20 @@ public class JdbcCustomerDao extends JdbcBaseDao<Customer> implements CustomerDa
 
     @Override
     public void update(Customer customer) throws SQLException {
-
+        String update = "UPDATE CUSTOMERS SET LOGIN = ?, PASSWORD = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ? WHERE id = ?";
+        PreparedStatement ps = super.getConnection().prepareStatement(update);
+        ps.setString(1, customer.getLogin());
+        ps.setString(2, customer.getPassword());
+        ps.setString(3, customer.getFirstName());
+        ps.setString(4, customer.getLastName());
+        ps.setString(5, customer.getEmail());
     }
 
     @Override
     public void delete(Customer customer) throws SQLException {
-
+        String delete = "UPDATE CUSTOMERS SET deleted WHERE id = ?";
+        PreparedStatement ps = super.getConnection().prepareStatement(delete);
+        ps.setLong(1, customer.getId());
     }
 
     @Override

@@ -1,0 +1,9 @@
+CREATE TABLE CUSTOMERS (
+  id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  uuid BINARY UNIQUE,
+  name VARCHAR(25),
+  ingredients INTEGER,
+  category INTEGER,
+  description VARCHAR(100),
+  price DOUBLE,
+  calories INTEGER)
